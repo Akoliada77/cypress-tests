@@ -1,2 +1,2 @@
-# cypress-tests
-some tests using cypress
+# cypress
+first cypress project
