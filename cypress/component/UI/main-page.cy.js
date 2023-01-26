@@ -12,5 +12,11 @@ describe('Tests for main page', () => {
     it('Main page is loaded', () => {
         main.pageIsLoaded()
     })
+    it('Check default amount of products', () => {
+        main.defaultAmountOfProducts()
+    })
+    it('', () => {
+        main.ss()
+    })
 
 })
