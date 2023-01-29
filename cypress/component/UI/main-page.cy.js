@@ -1,5 +1,5 @@
-import {Main} from '../../pages/Main'
-const main = new Main()
+import {MainPage} from '../../pages/mainPage'
+const main = new MainPage()
 
 /// <reference types="cypress" />
 
@@ -15,8 +15,11 @@ describe('Tests for main page', () => {
     it('Check default amount of products', () => {
         main.defaultAmountOfProducts()
     })
-    it('', () => {
-        main.ss()
+    it('Check the amount of navbar elements', () => {
+        main.checkCategoriesAmount()
+    })
+    it.only('Check the names of categories', () => {
+        main.checkCategoriesNames()
     })
 
 })

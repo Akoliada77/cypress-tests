@@ -3,8 +3,9 @@ const url = 'https://automationteststore.com/'
 const bannerSelector = '.banner_container'
 const navbarSelector = '#categorymenu'
 const productsSelector = '.thumbnail'
+const navBarElementsSelector = '#categorymenu > nav > ul > li> a'
 
-export class Main {
+export class MainPage {
     navigate(){
         cy.visit(url)
     }
@@ -16,6 +17,14 @@ export class Main {
     defaultAmountOfProducts(){
         cy.get(productsSelector).should('have.length', 16)
     }
+    checkCategoriesAmount(){
+        cy.get(navBarElementsSelector).should('have.length', 8)
+    }
+    checkCategoriesNames(){
+        cy.get(navBarElementsSelector).first().should('have.text', 'Home')
+        .next().should('have.text', 'Apparel & accessories')
 
+
+    }
 
 }
