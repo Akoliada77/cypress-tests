@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha ./tests/firstTest.cy.js -t \"a\"",
-    "open": "./node_modules/.bin/cypress open"
+    "open": "./node_modules/.bin/cypress open",
+    "e2e" : "cypress open"
   },
   "author": "koliada",
   "license": "ISC",
