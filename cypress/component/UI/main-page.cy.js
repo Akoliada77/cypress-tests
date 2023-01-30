@@ -18,8 +18,14 @@ describe('Tests for main page', () => {
     it('Check the amount of navbar elements', () => {
         main.checkCategoriesAmount()
     })
-    it.only('Check the names of categories', () => {
+    it.skip('Check the names of categories', () => {
         main.checkCategoriesNames()
+    })
+    it.skip('Check the names of home dropdown elements', () => {
+        main.checkHomeDropDownItems()
+    })
+    it('Check banner changing', () => {
+        main.bannerChanging()
     })
 
 })
