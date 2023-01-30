@@ -3,7 +3,7 @@ const main = new MainPage()
 
 /// <reference types="cypress" />
 
-describe('Tests for main page', () => {
+describe('UI tests for main page', () => {
 
     beforeEach(() => {
         main.navigate()

@@ -3,14 +3,24 @@ const mainPage = new MainPage
 
 /// <reference types="cypress" />
 
-describe('Some e2e tests', () => {
+const productsSelector = '.thumbnail'
+const cartPriceSelector = 'div.container-fluid span.cart_total'
+const productPriceSelector = '.productfilneprice'
 
-    beforeEach(() => {
+
+describe('E2e tests', () => {
+
+    before(() => {
         mainPage.navigate()
     })
     
-    it('main page is loaded', () => {
-        cy.get(bannerSelector)
-            .should('be.visible')
+    it('Adding products to the cart', () => {
+        cy.get(productsSelector).first().click()
+        cy.url().should('include', 'product_id=')
+        const price = cy.get(cartPriceSelector).its('text')
+        cy.log(price)
+        // price.should()
+        cy.contains('Add to Cart').click()
+
     })
 })
