@@ -26,8 +26,8 @@ describe('API tests', () => {
                 "Content-Type" : "application/json"
             },
             body :{
-                username: `${username}`,
-                password: `${password}`
+                username: username,
+                password: password
             }
         }).then(response => {
             expect(response.status).to.eql(200)
@@ -83,7 +83,7 @@ describe('API tests', () => {
             body :{
                     "firstname" : "Alex",
                     "lastname" : "Koliada",
-                    "totalprice" : `${generateNumbers(4)}`,
+                    "totalprice" : generateNumbers(4),
                     "depositpaid" : true,
                     "bookingdates" : {
                         "checkin" : "2022-01-01",
@@ -110,12 +110,12 @@ describe('API tests', () => {
                 "Content-Type" : "application/json",
                 "Accept" : "application/json", 
                 "Cookie" : `token=${authToken}`,
-                "Authorization" : `${authorazation}`
+                "Authorization" : authorazation
             },
             body :{
-                    "firstname" : `${newFirstName}`,
-                    "lastname" : `${newSecondName}`,
-                    "totalprice" : `${newTotalPrice}`,
+                    "firstname" : newFirstName,
+                    "lastname" : newSecondName,
+                    "totalprice" : newTotalPrice,
                     "depositpaid" : false,
                     "bookingdates" : {
                         "checkin" : "2021-01-01",
@@ -126,7 +126,9 @@ describe('API tests', () => {
         }).then(response => {
             expect(response.status).to.eql(200)
             let body = JSON.parse(JSON.stringify(response.body))
-            cy.log(body)
+            cy.wrap(body).should('have.property', 'firstname', newFirstName)
+            cy.wrap(body).should('have.property', 'lastname', newSecondName)
+            cy.wrap(body).should('have.property', 'totalprice', Number(newTotalPrice))
         })
     })
 
