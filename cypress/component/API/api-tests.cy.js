@@ -99,7 +99,6 @@ describe('API tests', () => {
         return createdBookId
     })
     it('Update the created booking via put request', () => {   
-        cy.log(createdBookId)
         const newFirstName = generateID(8)
         const newSecondName = generateID(7)
         const newTotalPrice = generateNumbers(5)
@@ -131,5 +130,30 @@ describe('API tests', () => {
             cy.wrap(body).should('have.property', 'totalprice', Number(newTotalPrice))
         })
     })
-
+    it('Updating the created booking using patch request', () => {   
+        const newFirstName = generateID(8)
+        const newSecondName = generateID(7)
+        const newAdditionalNeeds = generateID(10)
+        cy.request({
+            method: 'PATCH',
+            url: `${url}/booking/${createdBookId}`,
+            headers :{
+                "Content-Type" : "application/json",
+                "Accept" : "application/json", 
+                "Cookie" : `token=${authToken}`,
+                "Authorization" : authorazation
+            },
+            body :{
+                    "firstname" : newFirstName,
+                    "lastname" : newSecondName,
+                    "additionalneeds" : newAdditionalNeeds
+            }
+        }).then(response => {
+            expect(response.status).to.eql(200)
+            let body = JSON.parse(JSON.stringify(response.body))
+            cy.wrap(body).should('have.property', 'firstname', newFirstName)
+            cy.wrap(body).should('have.property', 'lastname', newSecondName)
+            cy.wrap(body).should('have.property', 'additionalneeds', newAdditionalNeeds)
+        })
+    })
 })
