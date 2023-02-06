@@ -1,7 +1,7 @@
+/// <reference types="cypress" />
+
 import {MainPage} from '../../pages/mainPage'
 const main = new MainPage()
-
-/// <reference types="cypress" />
 
 describe('UI tests for main page', () => {
 
