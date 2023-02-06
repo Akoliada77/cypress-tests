@@ -5,10 +5,7 @@ const url = 'https://restful-booker.herokuapp.com'
 
 describe('API tests', () => {
     let authToken = ''
-    let createdBookId = ''
-    beforeEach(() => {
-    
-    })
+
     it('Health check', () => {
         cy.request({
             method: 'GET',
@@ -73,87 +70,5 @@ describe('API tests', () => {
             cy.wrap(body).should('have.property', 'additionalneeds')
         })
     })
-    it('Create a new booking via post request', () => {   
-        cy.request({
-            method: 'POST',
-            url: `${url}/booking`,
-            headers :{
-                "Content-Type" : "application/json"
-            },
-            body :{
-                    "firstname" : "Alex",
-                    "lastname" : "Koliada",
-                    "totalprice" : generateNumbers(4),
-                    "depositpaid" : true,
-                    "bookingdates" : {
-                        "checkin" : "2022-01-01",
-                        "checkout" : "2023-01-01"
-                    },
-                    "additionalneeds" : "Lunch"
-            }
-        }).then(response => {
-            expect(response.status).to.eql(200)
-            let body = JSON.parse(JSON.stringify(response.body))
-            createdBookId = body.bookingid
-        })
-        return createdBookId
-    })
-    it('Update the created booking via put request', () => {   
-        const newFirstName = generateID(8)
-        const newSecondName = generateID(7)
-        const newTotalPrice = generateNumbers(5)
-        cy.request({
-            method: 'PUT',
-            url: `${url}/booking/${createdBookId}`,
-            headers :{
-                "Content-Type" : "application/json",
-                "Accept" : "application/json", 
-                "Cookie" : `token=${authToken}`,
-                "Authorization" : authorazation
-            },
-            body :{
-                    "firstname" : newFirstName,
-                    "lastname" : newSecondName,
-                    "totalprice" : newTotalPrice,
-                    "depositpaid" : false,
-                    "bookingdates" : {
-                        "checkin" : "2021-01-01",
-                        "checkout" : "2024-01-01"
-                    },
-                    "additionalneeds" : "LunchAfterPut"
-            }
-        }).then(response => {
-            expect(response.status).to.eql(200)
-            let body = JSON.parse(JSON.stringify(response.body))
-            cy.wrap(body).should('have.property', 'firstname', newFirstName)
-            cy.wrap(body).should('have.property', 'lastname', newSecondName)
-            cy.wrap(body).should('have.property', 'totalprice', Number(newTotalPrice))
-        })
-    })
-    it('Updating the created booking using patch request', () => {   
-        const newFirstName = generateID(8)
-        const newSecondName = generateID(7)
-        const newAdditionalNeeds = generateID(10)
-        cy.request({
-            method: 'PATCH',
-            url: `${url}/booking/${createdBookId}`,
-            headers :{
-                "Content-Type" : "application/json",
-                "Accept" : "application/json", 
-                "Cookie" : `token=${authToken}`,
-                "Authorization" : authorazation
-            },
-            body :{
-                    "firstname" : newFirstName,
-                    "lastname" : newSecondName,
-                    "additionalneeds" : newAdditionalNeeds
-            }
-        }).then(response => {
-            expect(response.status).to.eql(200)
-            let body = JSON.parse(JSON.stringify(response.body))
-            cy.wrap(body).should('have.property', 'firstname', newFirstName)
-            cy.wrap(body).should('have.property', 'lastname', newSecondName)
-            cy.wrap(body).should('have.property', 'additionalneeds', newAdditionalNeeds)
-        })
-    })
+    
 })

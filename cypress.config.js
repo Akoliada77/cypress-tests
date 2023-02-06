@@ -13,6 +13,6 @@ module.exports = defineConfig({
     },
   },
   component: {
-  specPattern: 'component/**/*.cy.{js,jsx,ts,tsx}'
+  specPattern: 'component/**/*.cy.{js,jsx,ts,tsx}',
   }
 });
