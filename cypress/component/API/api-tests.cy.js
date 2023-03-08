@@ -11,6 +11,7 @@ describe('API tests', () => {
             method: 'GET',
             url : `${url}/ping`
         }).then(response => {
+            expect(response.status).to.eql(201)
             let body = JSON.parse(JSON.stringify(response.body))
             expect(body).to.eq('Created')
         })
